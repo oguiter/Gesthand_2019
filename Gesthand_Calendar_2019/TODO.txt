@@ -1,0 +1,8 @@
+=== TODO ===
+* Improve TRACES (==> LOG or FMT)
+
+
+* recuperation automatique aprés le login/password de la page:
+	http://gesthand-extraction.ff-handball.org/index.php
+* Settings: Calendar name (not "Primary")
+* Code cleaning !!! (Separate UI and engine)
