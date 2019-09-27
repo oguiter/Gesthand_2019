@@ -13,7 +13,7 @@ Les informations de reference sont recuperées du site:
 	Le programme a besoin du fichier credentials.json_secret pour generer le fichier
 	token.json ()
    - La 1ere execution va ouvrir le browser en proposant de choisir son compte Google
-	- Choix: Villeneuve Handball => Authoriser
+	- Choix: Mon Club Handball => Authoriser
  	- Copier le code et le copier dans la boite de dialogue => OK
 	- le jeton d'autorisation est créé.
 
