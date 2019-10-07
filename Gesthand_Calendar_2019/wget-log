@@ -1,0 +1,6 @@
+--2019-10-01 09:32:34--  http://gesthand-extraction.ff-handball.org/export_csv.php?section=competition
+Resolving gesthand-extraction.ff-handball.org (gesthand-extraction.ff-handball.org)... 51.254.59.99
+Connecting to gesthand-extraction.ff-handball.org (gesthand-extraction.ff-handball.org)|51.254.59.99|:80... connected.
+HTTP request sent, awaiting response... 500 Internal Server Error
+2019-10-01 09:32:34 ERROR 500: Internal Server Error.
+

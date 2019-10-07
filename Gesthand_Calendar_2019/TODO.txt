@@ -1,5 +1,7 @@
 === TODO ===
 * Improve TRACES (==> LOG or FMT)
+* Recuperation automatique aprés login:
+http://gesthand-extraction.ff-handball.org/export_csv.php?section=competition&type=rencontre&joue=0&week=%&perimetre=0&csv
 
 
 * recuperation automatique aprés le login/password de la page:
