@@ -71,6 +71,9 @@ var myDBGTraces = 0 // 0, 1, 2 ...
 var myDBGReadOnlyMode = 0
 
 // DEFINES
+var Main_Club_ID = "6134078" // Code club
+var Entente_MUC_VHB = "VILLENEUVE"
+
 var defVHBCalName = "primary" // TODO
 var mColorID = make(map[string]int)
 
@@ -117,6 +120,27 @@ func gPrepareEvent(srv *calendar.Service, strData []string, uCalID string) {
 			i++
 		}
 		mw.te.AppendText("---------------------------------------\r\n")
+	}
+
+	// Verification:
+	// 1 - Si pas de club visiteur ou recevant, on ignore
+	if (len(strData[32]) == 0) || (len(strData[33]) == 0) {
+		// Pas de nom de clubNo data => skip
+		return
+	}
+
+	// 2 - Le code du club doit être présent dans le club recevant ou visiteur (strData[32] & strData[33] ==> string num Rec et Num Vis)
+	if (strData[32] != Main_Club_ID) && (strData[33] != Main_Club_ID) {
+		// Si l'id du club n'est ni recev ni visiteur, il s'agit peut etre d'une entente
+		// On va donc voir si le nom du club apparait dans un des deux clubs (strData[7] & strData[8])
+
+		// fmt.Printf("\t=>[%s] [%s]\n", strData[7], strData[8])
+		//fmt.Printf("\t=>[%v] [%s]\n\n", strings.Contains(Entente_MUC_VHB, strData[7]), strings.Contains(Entente_MUC_VHB, strData[8]))
+		// TODO: faire une liste d'identifiant (e.g.: "VILLENEUVE", "VHB", ...)
+		if strings.Contains(strData[7], Entente_MUC_VHB) == false && strings.Contains(strData[8], Entente_MUC_VHB) == false {
+			// Skip to the next
+			return
+		}
 	}
 
 	mw.te.AppendText(fmt.Sprintf("\r\n==> Prepare Match [%s]\r\n", strData[2]))
