@@ -272,31 +272,35 @@ func gPrepareEvent(srv *calendar.Service, strData []string, uCalID string) {
 		}
 	}
 
-	if myDBGTraces > 1 {
-		mw.te.AppendText("+++++++++++ DBG Event +++++++++++\r\n")
+	//if myDBGTraces > 1 {
+	if true {
+		log.Println("+++++++++++ DBG Event +++++++++++")
 		//TODO Vrai DUMP
-		mw.te.AppendText(fmt.Sprintf("\tID: %s\r\n", id))
-		mw.te.AppendText(fmt.Sprintf("\n\tSummary: %s\n\tloc: %s\n\tdesc: %s \n\ttag: %s \r\n", summ, loc, desc, tag))
-		mw.te.AppendText(fmt.Sprintf("\tTZ: %s\r\n", hTimeZone))
+		log.Println(fmt.Sprintf("\tID: %s\r\n", id))
+		log.Println(fmt.Sprintf("\n\tSummary: %s\n\tloc: %s\n\tdesc: %s \n\ttag: %s", summ, loc, desc, tag))
+		log.Println(fmt.Sprintf("\tTZ: %s\r\n", hTimeZone))
 
-		mw.te.AppendText(fmt.Sprintf("\tHORAIRES  :! deb [%s] / [%s]\r\n", debDate, endDate))
-		mw.te.AppendText(fmt.Sprintf("\n+++++++++++++++++++++++++++++\r\n"))
+		log.Println(fmt.Sprintf("\tHORAIRES  :! deb [%s] / [%s]", debDate, endDate))
+		log.Println(fmt.Sprintf("\n+++++++++++++++++++++++++++++"))
 	}
 
 	if myDBGReadOnlyMode == 0 {
 		time.Sleep(500 * time.Millisecond)
 		// Ecriture
 		event, err := srv.Events.Insert(uCalID, eventX).Do()
+
 		if err != nil {
 			// An error occured:
+			log.Println(fmt.Sprintf("==> Error on Insert:\n %v", err))
 			switch err.(*googleapi.Error).Code {
 			case 400: // TODO
 				mw.te.AppendText(fmt.Sprintf("%v\r\n", err))
+				log.Println(fmt.Sprintf("%v\r\n", err))
 				mw.te.AppendText(fmt.Sprintf("WARNING TODO  ========= (400) IGNORE / PLATEAU TO FIX !!!\r\n"))
 
 			case 403: //TODO
-				mw.te.AppendText(fmt.Sprintf("%v\r\n", err))
-				mw.te.AppendText(fmt.Sprintf(" WARNING TODO ======= Time out!!!\r\n"))
+				log.Println(fmt.Sprintf("403: %v\r\n", err))
+				log.Println(fmt.Sprintf(" WARNING TODO ======= Time out!!!\r\n"))
 
 			case 409: //  #already exist
 				//mw.te.AppendText(fmt.Sprintf("Warning 409: Try to update event %s...", eventX.Id))
